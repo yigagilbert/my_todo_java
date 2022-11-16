@@ -16,14 +16,14 @@ class Tasks {
         }
         String name, description,status;
         int statusValue;
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Please Enter task title : ");
-        name = sc.nextLine();
+        name = input.nextLine();
         System.out.println("Description : ");
-        description = sc.nextLine();
+        description = input.nextLine();
         System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed) ");
-        status = sc.nextInt();
-        switch (status) {
+        statusValue = input.nextInt();
+        switch (statusValue) {
             case 1:
                 status = choices.NEW.toString();
                 break;
@@ -37,8 +37,8 @@ class Tasks {
                 status = choices.NEW.toString();
                 break;
         }
-        String[] data = { name, desc, st };
-        sc.close();
+        String[] data = { name, description, status };
+        input.close();
         return data;
     }
 }
