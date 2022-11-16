@@ -4,7 +4,7 @@ public class ToDo {
         System.out.println("\t\t.....ToDo Manager.....\t\t");
         Tasks task = new Tasks();
         String[] tasks = task.printTask();
-        System.out.println("Title \t Description \t Status");
+        System.out.println("Name \t Description \t Status");
         System.out.println(tasks[0]+"\t"+tasks[1]+"\t"+tasks[2]);
     }
 }
@@ -14,30 +14,30 @@ class Tasks {
         enum choices {
             NEW, INPROGRESS, COMPLETED
         }
-        String title, desc,st;
-        int status;
+        String name, description,status;
+        int statusValue;
         Scanner sc = new Scanner(System.in);
         System.out.println("Please Enter task title : ");
-        title = sc.nextLine();
+        name = sc.nextLine();
         System.out.println("Description : ");
-        desc = sc.nextLine();
+        description = sc.nextLine();
         System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed) ");
         status = sc.nextInt();
         switch (status) {
             case 1:
-                st = choices.NEW.toString();
+                status = choices.NEW.toString();
                 break;
             case 2:
-                st = choices.INPROGRESS.toString();
+                status = choices.INPROGRESS.toString();
                 break;
             case 3:
-                st = choices.COMPLETED.toString();
+                status = choices.COMPLETED.toString();
                 break;
             default:
-                st = choices.NEW.toString();
+                status = choices.NEW.toString();
                 break;
         }
-        String[] data = { title, desc, st };
+        String[] data = { name, desc, st };
         sc.close();
         return data;
     }
