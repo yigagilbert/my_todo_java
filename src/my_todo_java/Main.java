@@ -23,12 +23,14 @@ public class Main {
         System.out.println("Description : ");
         task.setDescription(input.nextLine());
         
-        String[] tasks = task.printTask();
+//        String[] tasks = task.printTask();
         System.out.println(task.getName()+"\t"+task.getDescription()+"\t"+task.getStatus());
 
         String[][] myTasks = new String[3][];
         
         myTasks[i] = task.printTask();
+        
+        System.out.println( Arrays.toString( myTasks ));
 		}
         input.close();
 	}
