@@ -4,15 +4,12 @@ import java.util.*;
 import constants.choice;
 
 public class Task {
+	String name, description,status;
+	int statusValue;
 	
 	 public String[] printTask() {
-	        String name, description,status;
-	        int statusValue;
+	        	        
 	        Scanner input = new Scanner(System.in);
-	        System.out.println("Please Enter task title : ");
-	        name = input.nextLine();
-	        System.out.println("Description : ");
-	        description = input.nextLine();
 	        System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed) ");
 	        statusValue = input.nextInt();
 	        switch (statusValue) {
@@ -33,5 +30,33 @@ public class Task {
 	        input.close();
 	        return data;
 	    }
+	 
+	 public String getName(){
+			return name;
+		}
+
+	public void setName(String name){
+			this.name = name;
+		}
+
+	public String getDescription(){
+			return description;
+		}
+
+	public void setDescription(String description){
+			this.description = description;
+		}
+
+	public String getStatus(){
+			return status;
+		}
+
+	public void setStatus(String status){
+			this.status = status;
+		}
+//	public String[] getTask(){
+//		return data;
+//	}
+
 
 }
