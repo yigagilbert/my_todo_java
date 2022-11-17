@@ -1,12 +1,11 @@
 package task;
 import java.util.*;
 
+import constants.choice;
+
 public class Task {
 	
 	 public String[] printTask() {
-	        enum choices {
-	            NEW, INPROGRESS, COMPLETED
-	        }
 	        String name, description,status;
 	        int statusValue;
 	        Scanner input = new Scanner(System.in);
@@ -18,16 +17,16 @@ public class Task {
 	        statusValue = input.nextInt();
 	        switch (statusValue) {
 	            case 1:
-	                status = choices.NEW.toString();
+	                status = choice.NEW.toString();
 	                break;
 	            case 2:
-	                status = choices.INPROGRESS.toString();
+	                status = choice.INPROGRESS.toString();
 	                break;
 	            case 3:
-	                status = choices.COMPLETED.toString();
+	                status = choice.COMPLETED.toString();
 	                break;
 	            default:
-	                status = choices.NEW.toString();
+	                status = choice.NEW.toString();
 	                break;
 	        }
 	        String[] data = { name, description, status };

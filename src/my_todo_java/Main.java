@@ -1,15 +1,10 @@
-/**
- * 
- */
+
 package my_todo_java;
 
 import task.Task;
 
-/**
- * @author user
- *
- */
-public class main {
+
+public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
