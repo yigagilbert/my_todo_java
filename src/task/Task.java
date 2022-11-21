@@ -7,7 +7,7 @@ public class Task {
 	String name, description,status;
 	int statusValue;
 	
-	 public String[] printTask() {
+	 public void getChoice() {
 	        	        
 	        Scanner input = new Scanner(System.in);
 	        System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed) ");
@@ -26,10 +26,14 @@ public class Task {
 	                status = choice.NEW.toString();
 	                break;
 	        }
-	        String[] data = { name, description, status };
-	        input.close();
-	        return data;
+	       
 	    }
+	 public String[] getTask() {
+		 String[] data = { name, description, status };
+//	        input.close();
+	        return data;
+		 
+	 }
 	 
 	 public String getName(){
 			return name;
