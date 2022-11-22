@@ -8,6 +8,6 @@ package constants;
  *
  */
 public enum Choice {
-	NEW, INPROGRESS, COMPLETED
+	NEW, IN_PROGRESS, COMPLETED
 
 }
