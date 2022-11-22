@@ -1,5 +1,5 @@
 
-package my_todo_java;
+package myTodo;
 
 import java.util.*;
 
