@@ -1,46 +1,72 @@
 package task;
 import constants.Choice;
-
+/**
+ * 
+ * the task class holds the attributes of the tasks
+ *
+ */
 public class Task {
+	/**
+	 * name of the task
+	 */
 	private String name; 
+	/**
+	 * more details about the task
+	 */
 	private String description;
+	/**
+	 * the status of the task at current state
+	 */
 	private Choice status;
 	
-	
-	
-	 public String[] getTask() {
-		 String[] data = { name, description };
-//	        input.close();
-	        return data;
-		 
-	 }
-	 
+	/**
+	 * getName method 
+	 * @return 
+	 */
 	 public String getName(){
+		 /**
+		  * returns task name
+		  */
 			return name;
 		}
 
-	public void setName(String name){
+	 /**
+		 * setName method 
+		 * @return 
+		 */
+	 public void setName(String name){
 			this.name = name;
 		}
 
+	/**
+	 * getDescription method 
+	 * @return 
+	 */
 	public String getDescription(){
 			return description;
 		}
 
+	/**
+	 * setDescription method 
+	 * @return 
+	 */
 	public void setDescription(String description){
 			this.description = description;
 		}
 
+	/**
+	 * getStatus method 
+	 * @return 
+	 */
 	public Choice getStatus(){
 			return status;
 		}
 
+	/**
+	 * setStatus method 
+	 * @return 
+	 */
 	public void setStatus(Choice status){
 			this.status = status;
 		}
-//	public String[] getTask(){
-//		return data;
-//	}
-
-
 }
