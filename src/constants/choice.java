@@ -1,13 +1,13 @@
 /**
- * 
+ *constants 
  */
 package constants;
 
 /**
- * @author user
+ * @author gilbertyiga
  *
  */
-public enum choice {
+public enum Choice {
 	NEW, INPROGRESS, COMPLETED
 
 }

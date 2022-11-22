@@ -1,35 +1,15 @@
 package task;
-import java.util.*;
-
-import constants.choice;
+import constants.Choice;
 
 public class Task {
-	String name, description,status;
-	int statusValue;
+	private String name; 
+	private String description;
+	private Choice status;
 	
-	 public void getChoice() {
-	        	        
-	        Scanner input = new Scanner(System.in);
-	        System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed) ");
-	        statusValue = input.nextInt();
-	        switch (statusValue) {
-	            case 1:
-	                status = choice.NEW.toString();
-	                break;
-	            case 2:
-	                status = choice.INPROGRESS.toString();
-	                break;
-	            case 3:
-	                status = choice.COMPLETED.toString();
-	                break;
-	            default:
-	                status = choice.NEW.toString();
-	                break;
-	        }
-	       
-	    }
+	
+	
 	 public String[] getTask() {
-		 String[] data = { name, description, status };
+		 String[] data = { name, description };
 //	        input.close();
 	        return data;
 		 
@@ -51,11 +31,11 @@ public class Task {
 			this.description = description;
 		}
 
-	public String getStatus(){
+	public Choice getStatus(){
 			return status;
 		}
 
-	public void setStatus(String status){
+	public void setStatus(Choice status){
 			this.status = status;
 		}
 //	public String[] getTask(){
