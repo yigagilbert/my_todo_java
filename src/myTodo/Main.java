@@ -13,10 +13,7 @@ import task.Task;
  *
  */
 public class Main {
-	
-	public static List<String> taskNames =new ArrayList<String>();
-	public static List<String> taskDescriptions =new ArrayList<String>();
-	public static List<String> taskStatuses =new ArrayList<String>();
+	public static List<Task> tasks =new ArrayList<Task>();
 	public static Task task = new Task();
 	public static Scanner input = new Scanner(System.in);
 
@@ -68,19 +65,16 @@ public class Main {
 	        switch (Integer.parseInt(readFromUser())) {
 	            case 1:
 	            	task.setStatus(Status.NEW);
-	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            case 2:
 	            	task.setStatus(Status.IN_PROGRESS);
-	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            case 3:
 	            	task.setStatus(Status.COMPLETED);
-	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            default:
 	            	task.setStatus(Status.NEW);
-	            	addToTodoList(taskStatuses, task.getStatus().toString());
+
 	                break;
 	        }
 	      
@@ -94,18 +88,15 @@ public class Main {
 	 private static void enterTask() {
 		 
 		 System.out.println("Please Enter task title : ");
-         task.setName(readFromUser());
-         addToTodoList(taskNames, task.getName() );
-         
+         task.setName(readFromUser());       
         
          System.out.println("Description : ");
          task.setDescription(readFromUser());
-         addToTodoList(taskDescriptions, task.getDescription() );
          
          getChoice();
        
          System.out.println("Task added successfully");
-                 
+         addToTodoList(task);        
 
 	 }
 	 
@@ -114,8 +105,8 @@ public class Main {
 	    }
 	 
 	 
-	 private static void addToTodoList(List<String> userList, String item) {
-	        userList.add(item);
+	 private static void addToTodoList(Task item) {
+	        tasks.add(item);
 	    }
 	 
 	 /**
@@ -126,8 +117,9 @@ public class Main {
 	        Calendar currentDate = Calendar.getInstance();
 	        System.out.println("List's Date: " + simpleDate.format(currentDate.getTime()));
 
-	        for (int listSize = 0; listSize != taskNames.size(); listSize++) { 
-	            System.out.println(listSize + 1 + ". " + taskNames.get(listSize) + ", " + taskDescriptions.get(listSize)+ ", " + taskStatuses.get(listSize));
+	        for (int listSize = 0; listSize != tasks.size(); listSize++) { 
+
+	            System.out.println(listSize + 1 + ". " + tasks.get(listSize).getName() + ", " + tasks.get(listSize).getDescription()+ ", " + tasks.get(listSize).getStatus());
 	        }
 	    }
 	 
@@ -135,10 +127,8 @@ public class Main {
 		 printList();
 		 
 		 System.out.println("Enter number of task to delete");
-		 int index = Integer.parseInt(readFromUser());
-		 taskNames.remove(index);
-		 taskDescriptions.remove(index);
-		 taskStatuses.remove(index);
+		 
+		 tasks.remove(Integer.parseInt(readFromUser()));
 		 
 		 printList();
 
