@@ -1,6 +1,7 @@
 
 package myTodo;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import constants.Choice;
@@ -13,8 +14,11 @@ import task.Task;
  */
 public class Main {
 	
-	public static List<Task> tasks =new ArrayList<Task>();
+	public static List<String> taskNames =new ArrayList<String>();
+	public static List<String> taskDescriptions =new ArrayList<String>();
+	public static List<String> taskStatuses =new ArrayList<String>();
 	public static Task task = new Task();
+	public static Scanner input = new Scanner(System.in);
 
 	/**
 	 * driver method.
@@ -22,11 +26,9 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner input = new Scanner(System.in);
+		
 		System.out.println("\t\t.....ToDo Manager.....\t\t");
-        
-        System.out.println("What next \n 1. Enter task \n 2. View cur1rent tasks \n 3. Exit) ");
-        
+ 
 	
 		/**
 		 * infinity loop that allows
@@ -34,40 +36,51 @@ public class Main {
 		 * view tasks or even exit program. 
 		 */
 		while(true) {
-	        switch (input.nextInt()) {
+			System.out.println("What next \n 1. Enter task \n 2. View cur1rent tasks \n 3. Delete task \n 4. Exit) ");
+	        switch (Integer.parseInt(readFromUser())) {
 	            case 1:
 	            	enterTask();
 	                break;
 	            case 2:
-	            	viewTasks();
+	            	printList();
 	                break;
 	            case 3:
-	                break;
+	            	deleteTask();
+	            	break;
+	            case 4:
+	            	System.out.println("BYE BYE");
+	            	System.exit(0);
 	        }
 	      
 		}
-		  input.close();
+		
+		
+		  
 	}
 	/**
 	 * getChoice method
 	 * allows user select the status of the task
 	 */
-	 public static void getChoice() {
+	private static void getChoice() {
 		 
 				System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed) ");
 			
-	        switch (input.nextInt()) {
+	        switch (Integer.parseInt(readFromUser())) {
 	            case 1:
 	            	task.setStatus(Choice.NEW);
+	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            case 2:
 	            	task.setStatus(Choice.IN_PROGRESS);
+	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            case 3:
 	            	task.setStatus(Choice.COMPLETED);
+	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            default:
 	            	task.setStatus(Choice.NEW);
+	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	        }
 	      
@@ -78,38 +91,61 @@ public class Main {
 	  * enterTask method
 	  * allows the user to add new task. 
 	  */
-	 public static void enterTask() {
-		 Scanner input = new Scanner(System.in);
+	 private static void enterTask() {
+		 
 		 System.out.println("Please Enter task title : ");
-         task.setName(input.nextLine());
+         task.setName(readFromUser());
+         addToTodoList(taskNames, task.getName() );
+         
+         getChoice();
        
          System.out.println("Description : ");
-         task.setDescription(input.nextLine());
+         task.setDescription(readFromUser());
+         addToTodoList(taskDescriptions, task.getDescription() );
        
-         getChoice();
        
          System.out.println("Name \t Description \t Status");
          System.out.println(task.getName()+"\t"+task.getDescription()+"\t"+task.getStatus());
        
-         tasks.add(task);
+        
 
 	 }
+	 
+	 private static String readFromUser() {
+	        return input.nextLine();
+	    }
+	 
+	 
+	 private static void addToTodoList(List<String> userList, String item) {
+	        userList.add(item);
+	    }
 	 
 	 /**
 	  * viewTask method that displays the currently available tasks
 	  */
-	 public static void viewTasks() {
-		if(tasks.isEmpty()){
-			System.out.println("No task at the moment!");
-		         
-		 }else{
-		    System.out.println("ID \t\t Task \t\t Description \t\t Status");
-		    for (Task task: tasks ) {
-		    	System.out.println((tasks.indexOf(task) + 1)+"\t"+task.getName()+"\t" + task.getDescription()+"\t" + task.getStatus());
-		       }
-	
-		     } 
-		}	 
+	 private static void printList() {
+	        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM/dd");
+	        Calendar currentDate = Calendar.getInstance();
+	        System.out.println("List's Date: " + simpleDate.format(currentDate.getTime()));
+
+	        for (int listSize = 0; listSize != taskNames.size(); listSize++) { 
+	            System.out.println(listSize + 1 + ". " + taskNames.get(listSize) + ", " + taskDescriptions.get(listSize)+ ", " + taskStatuses.get(listSize));
+	        }
+	    }
+	 
+	 private static void deleteTask() {
+		 printList();
+		 
+		 System.out.println("Enter number of task to delete");
+		 int index = Integer.parseInt(readFromUser());
+		 taskNames.remove(index);
+		 taskDescriptions.remove(index);
+		 taskStatuses.remove(index);
+		 
+		 printList();
+
+	 }
+	 
 	 } 
 
 
