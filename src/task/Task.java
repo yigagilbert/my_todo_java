@@ -1,5 +1,5 @@
 package task;
-import constants.Choice;
+import constants.Status;
 /**
  * 
  * the task class holds the attributes of the tasks
@@ -17,7 +17,7 @@ public class Task {
 	/**
 	 * the status of the task at current state
 	 */
-	private Choice status;
+	private Status status;
 	
 	/**
 	 * getName method 
@@ -58,7 +58,7 @@ public class Task {
 	 * getStatus method 
 	 * @return 
 	 */
-	public Choice getStatus(){
+	public Status getStatus(){
 			return status;
 		}
 
@@ -66,7 +66,7 @@ public class Task {
 	 * setStatus method 
 	 * @return 
 	 */
-	public void setStatus(Choice status){
+	public void setStatus(Status status){
 			this.status = status;
 		}
 }

@@ -4,7 +4,7 @@ package myTodo;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import constants.Choice;
+import constants.Status;
 import task.Task;
 
 /**
@@ -67,19 +67,19 @@ public class Main {
 			
 	        switch (Integer.parseInt(readFromUser())) {
 	            case 1:
-	            	task.setStatus(Choice.NEW);
+	            	task.setStatus(Status.NEW);
 	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            case 2:
-	            	task.setStatus(Choice.IN_PROGRESS);
+	            	task.setStatus(Status.IN_PROGRESS);
 	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            case 3:
-	            	task.setStatus(Choice.COMPLETED);
+	            	task.setStatus(Status.COMPLETED);
 	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	            default:
-	            	task.setStatus(Choice.NEW);
+	            	task.setStatus(Status.NEW);
 	            	addToTodoList(taskStatuses, task.getStatus().toString());
 	                break;
 	        }
@@ -97,17 +97,15 @@ public class Main {
          task.setName(readFromUser());
          addToTodoList(taskNames, task.getName() );
          
-         getChoice();
-       
+        
          System.out.println("Description : ");
          task.setDescription(readFromUser());
          addToTodoList(taskDescriptions, task.getDescription() );
+         
+         getChoice();
        
-       
-         System.out.println("Name \t Description \t Status");
-         System.out.println(task.getName()+"\t"+task.getDescription()+"\t"+task.getStatus());
-       
-        
+         System.out.println("Task added successfully");
+                 
 
 	 }
 	 
