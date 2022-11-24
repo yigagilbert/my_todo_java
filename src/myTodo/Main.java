@@ -33,7 +33,7 @@ public class Main {
 		 * view tasks or even exit program. 
 		 */
 		while(true) {
-			System.out.println("What next \n 1. Enter task \n 2. View cur1rent tasks \n 3. Delete task \n 4. Exit) ");
+			System.out.println("What next \n 1. Enter task \n 2. View cur1rent tasks \n 3. Delete task \n 4. Search task \n 5. Exit) ");
 	        switch (Integer.parseInt(readFromUser())) {
 	            case 1:
 	            	enterTask();
@@ -45,6 +45,9 @@ public class Main {
 	            	deleteTask();
 	            	break;
 	            case 4:
+	            	searchTask();
+	            	break;
+	            case 5:
 	            	System.out.println("BYE BYE");
 	            	System.exit(0);
 	        }
@@ -132,6 +135,18 @@ public class Main {
 		 
 		 printList();
 
+	 }
+	 private static void searchTask() {
+		 
+		 System.out.println("Enter task to be searched");
+
+		 String word = readFromUser();
+		 for (int listSize = 0; listSize != tasks.size(); listSize++) { 
+			 if(tasks.get(listSize).getName().compareToIgnoreCase(word) == 0){
+				 System.out.println(listSize + 1 +"." +tasks.get(listSize).getName());
+			 }
+		 }
+		 
 	 }
 	 
 	 } 
