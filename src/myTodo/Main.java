@@ -16,6 +16,7 @@ public class Main {
 	public static List<Task> tasks =new ArrayList<Task>();
 	public static Task task = new Task();
 	public static Scanner input = new Scanner(System.in);
+	public static String myName;
 
 	/**
 	 * driver method.
@@ -25,6 +26,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		System.out.println("\t\t.....ToDo Manager.....\t\t");
+		System.out.println("Enter your name:");
+		myName = readFromUser();
  
 	
 		/**
@@ -33,7 +36,7 @@ public class Main {
 		 * view tasks or even exit program. 
 		 */
 		while(true) {
-			System.out.println("What next \n 1. Enter task \n 2. View cur1rent tasks \n 3. Delete task \n 4. Search task \n 5. Exit) ");
+			System.out.println("What next \n 1. Enter task \n 2. View current tasks \n 3. Delete task \n 4. Search task \n 5. Exit) ");
 	        switch (Integer.parseInt(readFromUser())) {
 	            case 1:
 	            	enterTask();
@@ -48,7 +51,7 @@ public class Main {
 	            	searchTask();
 	            	break;
 	            case 5:
-	            	System.out.println("BYE BYE");
+	            	System.out.println("BYE BYE " + myName);
 	            	System.exit(0);
 	        }
 	      
@@ -63,7 +66,7 @@ public class Main {
 	 */
 	private static void getChoice() {
 		 
-				System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed) ");
+				System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed ");
 			
 	        switch (Integer.parseInt(readFromUser())) {
 	            case 1:
