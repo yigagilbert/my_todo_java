@@ -50,6 +50,9 @@ public class Main {
 	            case 4:
 	            	searchTask();
 	            	break;
+	            case 7:
+	            	
+	            	break;
 	            case 5:
 	            	System.out.println("BYE BYE " + myName);
 	            	System.exit(0);
@@ -102,6 +105,7 @@ public class Main {
          getChoice();
        
          System.out.println("Task added successfully");
+         
          addToTodoList(task);        
 
 	 }
@@ -112,7 +116,9 @@ public class Main {
 	 
 	 
 	 private static void addToTodoList(Task item) {
+		 
 	        tasks.add(item);
+	        
 	    }
 	 
 	 /**
