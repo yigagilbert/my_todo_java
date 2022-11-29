@@ -18,7 +18,31 @@ public class Task {
 	 * the status of the task at current state
 	 */
 	private Status status;
+	/**
+	 * the author of the task
+	 */
+	private String taskBy;
+	/**
+	 * the time at which the task was created
+	 */
+	private String createdAt;
 	
+	public String getTaskBy() {
+		return taskBy;
+	}
+
+	public void setTaskBy(String taskBy) {
+		this.taskBy = taskBy;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	/**
 	 * getName method 
 	 * @return 
