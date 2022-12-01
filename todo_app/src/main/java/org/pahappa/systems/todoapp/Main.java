@@ -16,7 +16,7 @@ import org.pahappa.systems.task.Task;
  */
 public class Main {
 	
-	public static String connectionUrl = "jdbc:mysql://localhost:3306/todo_app";
+	public static String connectionUrl = "jdbc:mysql://localhost:3306/my_todo";
 	public static String username = "google";
 	public static String password = "google";
 	public static Scanner input = new Scanner(System.in);
@@ -33,6 +33,7 @@ public class Main {
 	
 	private static void enterData()
 	{
+		
 		try{  
             Class.forName("com.mysql.cj.jdbc.Driver");  
             
@@ -56,7 +57,8 @@ public class Main {
             System.out.println("Enter task time");
             String taskAt = readFromUser();
 //            
-            String sql = "INSERT INTO task VALUES (1," +  taskName + ", " + taskDescription + ", " + createdBy + "," + taskStatus+ ","+taskAt +")";
+            String sql = "INSERT INTO tasks VALUES (5," +  "\"" + taskName + "\"" + ", " + "\"" + taskDescription + "\"" + ", " + "\"" + createdBy + "\"" + "," + "\"" + taskStatus+ "\"" + ","+ "\"" + taskAt + "\"" + ")";
+            System.out.println(sql);
             statement.executeUpdate(sql);
            
 //            while (resultset.next()) {
@@ -100,20 +102,20 @@ public class Main {
             
             List<Task> taskList = new ArrayList<Task>();
             
-            ResultSet resultset = statement.executeQuery("select * from task"); 
+            ResultSet resultset = statement.executeQuery("select * from tasks"); 
             while (resultset.next()) {
             	
             	Task task = new Task();
             	
-                task.setId(resultset.getInt("task_id"));
+                task.setId(resultset.getInt("taskId"));
                 
-                task.setName(resultset.getString("task_name"));
+                task.setName(resultset.getString("taskName"));
              
-                task.setDescription(resultset.getString("task_description"));
+                task.setDescription(resultset.getString("taskDesc"));
                 
-                task.setCreatedAt(resultset.getString("date_created"));
+                task.setTaskBy(resultset.getString("taskCreatedBy"));
                 
-                task.setTaskBy(resultset.getString("created_by"));
+                task.setCreatedAt(resultset.getString("taskCreatedOn"));
                 
                
                 System.out.println(task.getId() + ", " + task.getName() + ", " + task.getDescription() +
