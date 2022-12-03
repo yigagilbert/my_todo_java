@@ -15,8 +15,6 @@ import org.pahappa.systems.constants.Status;
  *
  */
 public class Task {
-	
-	private int id;
 
 	/**
 	 * name of the task
@@ -106,11 +104,4 @@ public class Task {
 			this.status = status;
 		}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 }

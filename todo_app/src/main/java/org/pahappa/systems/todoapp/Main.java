@@ -10,6 +10,10 @@ import java.util.Scanner;
 
 import org.pahappa.systems.task.Task;
 
+import org.pahappa.systems.constants.*;
+
+
+
 /**
  * @author google
  *
@@ -25,71 +29,87 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		
 		enterData();
 		readData();
+		search();
 		 
 
 	}
 	
 	private static void enterData()
 	{
+		String INSERT_RECORD = "insert into tasks values(?,?,?,?,?)";
 		
-		try{  
-            Class.forName("com.mysql.cj.jdbc.Driver");  
-            
-            Connection connection = DriverManager.getConnection(connectionUrl,username,password);  
-            
-            Statement statement = connection.createStatement();  
-                        
-            
-            System.out.println("Enter task name");
-            String taskName = readFromUser();
+	    try {
+	    	Task task = new Task();
+			Connection connection = DriverManager.getConnection(connectionUrl,username,password);		    
+			PreparedStatement pstmt = connection.prepareStatement(INSERT_RECORD);
+	    	pstmt.setString(1, "001");
+
+	    	java.util.Date date = new java.util.Date();
+	    	long t = date.getTime();
+	    	java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(t);
+	        
+	        System.out.println("Enter task name");
+	        task.setName(readFromUser());
+//            String taskName = readFromUser();
             
             System.out.println("Enter task Description");
-            String taskDescription = readFromUser();
+	        task.setDescription(readFromUser());
+
+//            String taskDescription = readFromUser();
             
             System.out.println("Enter your name");
-            String createdBy = readFromUser();
+	        task.setTaskBy(readFromUser());
+
+//            String createdBy = readFromUser();
             
             System.out.println("Enter task Status");
-            String taskStatus = readFromUser();
-            
-            System.out.println("Enter task time");
-            String taskAt = readFromUser();
-//            
-            String sql = "INSERT INTO tasks VALUES (5," +  "\"" + taskName + "\"" + ", " + "\"" + taskDescription + "\"" + ", " + "\"" + createdBy + "\"" + "," + "\"" + taskStatus+ "\"" + ","+ "\"" + taskAt + "\"" + ")";
-            System.out.println(sql);
-            statement.executeUpdate(sql);
-           
-//            while (resultset.next()) {
-//            	
-////            	Task task = new Task();
-//            	
-//            	
-//            	
-//                System.out.println("Enter task name");
-//                String taskName = readFromUser();
-//                resultset.updateString(0, taskName);
-//                
-//                System.out.println("Enter task Description");
-//                String taskDescription = readFromUser();
-//                resultset.updateString(0, taskDescription);
-//                
-//                System.out.println("Enter task Status");
-//                String taskStatus = readFromUser();
-//                resultset.updateString(0, taskStatus);
-//                
-//                System.out.println("Enter task Status");
-//                String taskBy = readFromUser();
-//                resultset.updateString(0, taskBy);
-//                
-//                
-//              }
-            connection.close();  
-        }catch(Exception e){
-            System.out.println(e);
-        } 
+	        task.setStatus(getChoice());
+
+//            String taskStatus = getChoice();
+	        
+	        pstmt.setString(1, task.getName());
+	        pstmt.setString(2, task.getDescription());
+//	        pstmt.setString(3, task.getStatus());
+	        pstmt.setString(4, task.getTaskBy());
+	        pstmt.setTimestamp(5, sqlTimestamp);
+	        pstmt.executeUpdate();
+	        connection.close();
+	        pstmt.close();
+
+
+	      } catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println("Failed to insert the record.");
+	      } 
 	}
+	
+	private static Status getChoice() {
+		Status theTask;
+		System.out.println("Task status \n 1. New \n 2. Inprogress \n 3. Completed ");
+	
+    switch (Integer.parseInt(readFromUser())) {
+        case 1:
+        	theTask = Status.NEW;
+            break;
+        case 2:
+        	theTask = Status.IN_PROGRESS;
+            break;
+        case 3:
+        	theTask = Status.COMPLETED;
+            break;
+        default:
+        	theTask = Status.NEW;
+
+            break;
+    }
+    return theTask;
+  
+   
+}
 	
 	private static void readData()
 	{
@@ -106,20 +126,33 @@ public class Main {
             while (resultset.next()) {
             	
             	Task task = new Task();
-            	
-                task.setId(resultset.getInt("taskId"));
-                
+            	                
                 task.setName(resultset.getString("taskName"));
              
                 task.setDescription(resultset.getString("taskDesc"));
                 
+//                task.setStatus(resultset.getString("taskStatus"));
+
                 task.setTaskBy(resultset.getString("taskCreatedBy"));
                 
                 task.setCreatedAt(resultset.getString("taskCreatedOn"));
                 
-               
-                System.out.println(task.getId() + ", " + task.getName() + ", " + task.getDescription() +
-                                   ", " + task.getCreatedAt() + ", " + task.getTaskBy());
+                System.out.println("=====================================");
+                
+                System.out.println(String.format("Task name: %s", task.getName()));
+                
+                System.out.println("Task description: " + task.getDescription());
+
+                System.out.println("Task Status: " + task.getStatus());
+                
+//                System.out.println("Task Status: " + task.getStatus());
+                
+                System.out.println("Task Created by: " + task.getTaskBy());
+
+                System.out.println("Task Created On: " + task.getCreatedAt());
+                
+                System.out.println("=====================================");
+
                 
                taskList.add(task); 
               }
@@ -132,5 +165,51 @@ public class Main {
 	private static String readFromUser() {
         return input.nextLine();
     }
+	
+	private static void search() {
+		
+		Connection connection;
+		try {
+			connection = DriverManager.getConnection(connectionUrl,username,password);
+			// Query which needs parameters
+	        String query
+	            = "Select * from task where taskName  ? or taskDescription ?";
+	 
+	        // Prepare Statement
+	        PreparedStatement myStmt
+	            = connection.prepareStatement(query);
+	        
+	        System.out.println("Enter task name");
+	        String name = readFromUser();
+//            String taskName = readFromUser();
+            
+            System.out.println("Enter task Description");
+	        String  desc = readFromUser();
+	 
+	        // Set Parameters
+	        myStmt.setString(1, name);
+	        myStmt.setString(2, desc);
+	 
+	        // Execute SQL query
+	        ResultSet resultset = myStmt.executeQuery();
+	 
+	        System.out.println("Age      Name");
+	 
+	        // Display function to show the Resultset
+	        while (resultset.next()) {
+	            String Name = resultset.getString("taskName");
+	            int age = resultset.getInt("taskDesc");
+	            System.out.println(Name + "     " + age);
+	        }
+	        
+	     // Close the connection
+	        connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		    
+
+		
+	}
 
 }
